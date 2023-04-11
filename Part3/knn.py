@@ -58,6 +58,8 @@ def cross_validate(x, y, k):
         y_pred = np.zeros(x_test.shape[0])
         for i in range(x_test.shape[0]):
             y_pred[i] = knn(x_train, y_train, x_test[i], k)
+        y_pred = y_pred.astype(int)
+        y_test = y_test.astype(int)
         accuracy = np.mean(y_pred == y_test)
         accuracies.append(accuracy)
     return accuracies
@@ -66,4 +68,4 @@ data = df.values
 x = data[:,1:]
 y = np.array([x[0] for x in data[:,:1]])
 accuracies = cross_validate(x, y, 3)
-accuracies
+print(accuracies)
